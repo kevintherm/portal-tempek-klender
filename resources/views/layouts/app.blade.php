@@ -24,7 +24,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favico/favicon-16x16.png">
     <link rel="manifest" href="/favico/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

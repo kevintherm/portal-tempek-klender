@@ -88,7 +88,7 @@
                                     <i class="fa-solid fa-bullhorn fa-sm text-slate-700"></i>
                                 </div>
                                 <div>
-                                    <p class="text-white">Jumlah Pengumuman</p>
+                                    <p class="text-white">Jml Pengumuman</p>
                                     <p class="font-semibold text-white">
                                         {{ App\Models\Post::where('type', 'pengumuman')->count() }}
                                     </p>

@@ -87,7 +87,7 @@
                             Filter
                         </x-secondary-button>
 
-                        <a href="{{ route('posts.create') }}" class="btn-secondary">
+                        <a wire:navigate href="{{ route('posts.create') }}" class="btn-secondary">
                             Tambah Post
                         </a>
                     </div>
@@ -145,11 +145,13 @@
                                         <td class="px-6 py-4">
                                             {{ $post->created_at != $post->updated_at ? 'Ya' : 'Tidak' }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <a class="btn-primary" href="{{ route('posts.show', $post->slug) }}">
+                                        <td class="px-6 py-4 flex gap-2 flex-wrap justify-evenly">
+                                            <a wire:navigate class="btn-primary"
+                                                href="{{ route('posts.show', $post->slug) }}">
                                                 Lihat
                                             </a>
-                                            <a class="btn-secondary" href="{{ route('posts.edit', $post->slug) }}">
+                                            <a wire:navigate class="btn-secondary"
+                                                href="{{ route('posts.edit', $post->slug) }}">
                                                 Edit
                                             </a>
                                             <x-danger-button @click="deletePost('{{ $post->slug }}')">

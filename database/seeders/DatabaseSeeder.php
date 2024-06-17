@@ -6,6 +6,7 @@ use App\Models\Post;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'kevin@gmail.com',
             'password' => bcrypt('123')
         ]);
+
 
         // Post::factory(15)->create();
     }

@@ -1,10 +1,21 @@
 <?php
 
-use App\Http\Controllers\NewMemberController;
+use App\Http\Controllers\UtilsController;
+use App\Livewire\DashboardEditMember;
+use App\Livewire\MemberPhotoHistory;
+use App\Models\User;
+use Livewire\Volt\Volt;
 use App\Livewire\DashboardPosts;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use Livewire\Volt\Volt;
+use App\Http\Controllers\NewMemberController;
+
+if (env('APP_DEBUG')) {
+    $user = User::first();
+
+    Auth::login($user);
+}
 
 Route::view('/', 'welcome')->name('home');
 
@@ -18,7 +29,17 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::get('posts', DashboardPosts::class)->name('dashboard.posts');
 
     Volt::route('members/create', 'dashboard-create-member')->name('dashboard.members.create');
-    Volt::route('members', 'dashboard-member')->name('dashboard.members');
+    Volt::route('members', 'dashboard-members')->name('dashboard.members');
+
+
+    Route::get('members/getMembersByName', [UtilsController::class, 'getMembersByName'])->name('utils.get_members_by_name');
+
+    Route::get('members/{member}/photo_history', MemberPhotoHistory::class)
+        ->name('members.history.photo');
+
+    Route::get('members/{member}/edit', DashboardEditMember::class)
+        ->name('dashboard.members.edit');
+
 
 });
 
