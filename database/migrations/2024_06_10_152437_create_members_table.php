@@ -17,12 +17,12 @@ return new class extends Migration {
             $table->string('status')->default('kepala keluarga');
             $table->foreignId('member_id')->nullable()->constrained('members')->onDelete('cascade'); // id kepala keluarga
             $table->string('name');
-            $table->integer('age');
             $table->string('job');
             $table->string('address');
             $table->string('phone')->unique();
             $table->text('reason_to_join');
             $table->boolean('is_dead')->default(false);
+            $table->timestamp('birth')->nullable();
             $table->timestamp('joined_at')->nullable();
             $table->text('photo')->nullable();
             $table->timestamps();

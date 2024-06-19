@@ -105,6 +105,10 @@
 
 
         @livewire('Footer')
+        @livewireScripts()
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <x-livewire-alert::scripts />
+
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('darkmode', () => ({
@@ -127,8 +131,40 @@
                             return this.darkMode
                         },
                     },
-                }))
+                }));
+
+                @if (config('app.birthdayRemember'))
+                    axios.get('/get-birthday-reminder').then(res => {
+                        const namestr = res.data.results.map(member => [member.name,
+                                `(${calculateAge(member.birth)})`
+                            ]
+                            .join(' ')).join(
+                            ', ')
+
+
+                        if (res.data.results.length > 0)
+                            Swal.fire({
+                                title: "Pengingat!",
+                                text: `${namestr}\nHari Ini Berulang Tahun!`,
+                                color: "#f1aa",
+                                background: "url(https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcm00NjdiYXRjaDUtc2NlbmUtdy0wMDItbDBha3pzejYuanBn.jpg) center center",
+                                backdrop: `rgba(65, 105, 177,0.4) url("/images/hbd.gif") top left/ 45% no-repeat `,
+                                confirmButtonText: 'Selamat Ulang Tahun!',
+                            });
+                    })
+                @endif
             })
+
+            function calculateAge(birthdate) {
+                const birthDate = new Date(birthdate);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDifference = today.getMonth() - birthDate.getMonth();
+                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age;
+            }
         </script>
     </div>
 </body>

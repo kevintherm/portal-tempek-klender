@@ -16,6 +16,22 @@
                     </h4>
 
                     <ol class="relative border-s border-gray-200 dark:border-gray-700">
+                        <li class="mb-10 ms-4">
+                            <div
+                                class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+                            </div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Foto
+                                Profil Saat Ini</time>
+                            @php
+                                setlocale(LC_TIME, 'IN');
+                            @endphp
+                            <img src="{{ Storage::url($member->photo) }}" alt="Foto Profil Saat ini"
+                                class="w-32 rounded-lg"
+                                x-on:click="Swal.fire({
+                        imageUrl: $el.src,
+                        title: $el.getAttribute('alt')
+                    })">
+                        </li>
                         @forelse ($photo_histories as $history)
                             <li class="mb-10 ms-4">
                                 <div

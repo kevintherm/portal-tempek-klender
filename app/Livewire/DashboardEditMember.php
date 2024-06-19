@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Member;
+use App\Models\StaffHistory;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\PhotoHistory;
@@ -28,8 +29,8 @@ class DashboardEditMember extends Component
 
     #[Validate('required|string|min:3|max:255')]
     public $name;
-    #[Validate('required|integer|min:0')]
-    public $age;
+    #[Validate('required|date')]
+    public $birth;
     #[Validate('required')]
     public $status;
     #[Validate('required|string')]
@@ -52,7 +53,7 @@ class DashboardEditMember extends Component
         $this->member = $member;
 
         $this->fill(
-            $member->only(['name', 'age', 'phone', 'status', 'address', 'job', 'position', 'reason_to_join', 'is_dead']),
+            $member->only(['name', 'birth', 'phone', 'status', 'address', 'job', 'position', 'reason_to_join', 'is_dead']),
         );
 
         $this->updatedJoinedAt();
@@ -80,8 +81,16 @@ class DashboardEditMember extends Component
         if ($this->status == 'Kepala Keluarga')
             $this->member_id = null;
 
+        if ($this->position != $this->member->position) {
+            StaffHistory::create([
+                'member_id' => $this->member->id,
+                'position' => $this->member->position,
+                'since' => $this->member->last_position_time
+            ]);
+        }
+
         $this->member->update(
-            $this->only(['name', 'age', 'phone', 'status', 'address', 'job', 'position', 'reason_to_join', 'is_dead', 'member_id'])
+            $this->only(['name', 'birth', 'phone', 'status', 'address', 'job', 'position', 'reason_to_join', 'is_dead', 'member_id'])
         );
 
         $this->alert('success', 'Berhasil Update Detail Anggota!', [

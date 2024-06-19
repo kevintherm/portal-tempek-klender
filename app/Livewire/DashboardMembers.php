@@ -43,7 +43,7 @@ class DashboardMembers extends Component
     public function render()
     {
         return view('livewire.dashboard-members', [
-            'members' => Member::filters(request(['name', 'phone', 'address']))->paginate(10)
+            'members' => Member::filters(request(['name', 'phone', 'address', 'position']))->paginate(10)
         ]);
     }
 

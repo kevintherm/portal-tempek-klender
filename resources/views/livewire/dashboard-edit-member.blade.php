@@ -112,10 +112,10 @@
                         @endif
 
                         <div class="mb-4">
-                            <x-input-label>Umur<x-field-required-indicator /></x-input-label>
-                            <x-text-input placeholder="Masukkan umur anggota" wire:model.blur="age" type="number"
-                                class="w-full text-lg" name="age" required />
-                            @error('age')
+                            <x-input-label>Tanggal Lahir<x-field-required-indicator /></x-input-label>
+                            <x-text-input placeholder="Masukkan tanggal lahir anggota" wire:model.blur="birth"
+                                type="date" class="w-full text-lg" name="birth" required />
+                            @error('birth')
                                 <x-input-error :messages="$message" />
                             @enderror
                         </div>

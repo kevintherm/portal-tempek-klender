@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\PhotoHistory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Member extends Model
@@ -33,6 +35,22 @@ class Member extends Model
         return $this->hasMany(PhotoHistory::class)->latest();
     }
 
+    function staff_histories()
+    {
+        return $this->hasMany(StaffHistory::class)->latest();
+    }
+
+    // custom properties
+    protected function getAgeAttribute()
+    {
+        return Carbon::parse($this->birth)->age;
+    }
+
+    function getLastPositionTimeAttribute()
+    {
+        return $this->staff_histories()->latest()?->first()->created_at ?? null;
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -42,7 +60,8 @@ class Member extends Model
     {
         return [
             'is_dead' => 'boolean',
-            'joined_at' => 'date:Y-m-d'
+            'joined_at' => 'date:Y-m-d',
+            'age' => 'date:Y-m-d'
         ];
     }
 
@@ -57,6 +76,9 @@ class Member extends Model
 
         $query->when($filters['address'] ?? false, fn($query, $address) =>
             $query->where('address', 'LIKE', "%$address%"));
+
+        $query->when($filters['position'] ?? false, fn($query, $pos) =>
+            $query->where('position', $pos));
     }
 
 }

@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\UtilsController;
+use App\Livewire\CreatePermission;
+use App\Livewire\CreateRole;
 use App\Livewire\DashboardEditMember;
+use App\Livewire\EditRole;
 use App\Livewire\MemberPhotoHistory;
+use App\Livewire\RoleManager;
 use App\Models\User;
 use Livewire\Volt\Volt;
 use App\Livewire\DashboardPosts;
@@ -16,6 +20,18 @@ if (env('APP_DEBUG')) {
 
     Auth::login($user);
 }
+
+Route::get('/get-birthday-reminder', [UtilsController::class, 'birthdayReminder']);
+
+Route::prefix('roles')->group(function () {
+    Route::get('/', RoleManager::class)->name('roles.index');
+    Route::get('/create', CreateRole::class)->name('roles.create');
+    Route::get('/{role}/edit', EditRole::class)->name('roles.edit');
+});
+
+Route::prefix('perms')->group(function () {
+    Route::get('/create', CreatePermission::class)->name('perms.create');
+});
 
 Route::view('/', 'welcome')->name('home');
 
@@ -39,7 +55,6 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
 
     Route::get('members/{member}/edit', DashboardEditMember::class)
         ->name('dashboard.members.edit');
-
 
 });
 

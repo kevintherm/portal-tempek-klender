@@ -10,8 +10,8 @@
             <div class="my-4 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-wrap gap-8">
 
-                    <div class="card w-64 h-24 rounded-lg shadow-lg overflow-hidden">
-                        <div class="wrapper h-2/3 w-full bg-orange-400 px-4 py-2">
+                    <div class="card w-full md:w-64 h-24 rounded-lg shadow-lg overflow-hidden">
+                        <div class="wrapper h-2/3 w-full bg-gray-500 px-4 py-2">
                             <div class="flex items-center flex-row gap-2">
                                 <div class="px-3 py-2 bg-teal-300/80 inline rounded-full">
                                     <i class="fa-regular fa-user"></i>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="footer dark:bg-gray-100 px-4 py-1">
                             <a href="{{ route('profile') }}"
-                                class="font-semibold text-orange-400 hover:text-orange-600 transition text-sm">Buka
+                                class="font-semibold text-blue-400 hover:text-blue-600 transition text-sm">Buka
                                 Profil</a>
                         </div>
                     </div>
@@ -33,13 +33,13 @@
             </div>
 
             <div class="my-4 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <h4 class="p-6 font-bold text-orange-400">Postingan</h4>
+                <h4 class="p-6 font-bold text-blue-400">Postingan</h4>
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-wrap gap-8">
 
 
 
-                    <div class="card w-64 h-24 rounded-lg shadow-lg overflow-hidden">
-                        <div class="wrapper h-2/3 w-full bg-slate-300 px-4 py-2">
+                    <div class="card w-full md:w-64 h-24 rounded-lg shadow-lg overflow-hidden">
+                        <div class="wrapper h-2/3 w-full bg-gray-500 px-4 py-2">
                             <div class="flex items-center flex-row gap-2">
                                 <div class="px-3 py-2 bg-teal-300/80 inline rounded-full">
                                     <i class="fa-regular fa-newspaper fa-sm text-slate-700"></i>
@@ -54,13 +54,13 @@
                         </div>
                         <div class="footer dark:bg-gray-100 px-4 py-1">
                             <a href="{{ route('dashboard.posts', ['type' => 'post']) }}"
-                                class="font-semibold text-orange-400 hover:text-orange-600 transition text-sm">Pergi ke
+                                class="font-semibold text-blue-400 hover:text-blue-600 transition text-sm">Pergi ke
                                 Dashboard</a>
                         </div>
                     </div>
 
-                    <div class="card w-64 h-24 rounded-lg shadow-lg overflow-hidden">
-                        <div class="wrapper h-2/3 w-full bg-slate-400 px-4 py-2">
+                    <div class="card w-full md:w-64 h-24 rounded-lg shadow-lg overflow-hidden">
+                        <div class="wrapper h-2/3 w-full bg-gray-500 px-4 py-2">
                             <div class="flex items-center flex-row gap-2">
                                 <div class="px-3 py-2 bg-teal-300/80 inline rounded-full">
                                     <i class="fa-solid fa-calendar-days fa-sm text-slate-700"></i>
@@ -76,13 +76,13 @@
                         </div>
                         <div class="footer dark:bg-gray-100 px-4 py-1">
                             <a href="{{ route('dashboard.posts', ['type' => 'kegiatan']) }}"
-                                class="font-semibold text-orange-400 hover:text-orange-600 transition text-sm">Pergi ke
+                                class="font-semibold text-blue-400 hover:text-blue-600 transition text-sm">Pergi ke
                                 Dashboard</a>
                         </div>
                     </div>
 
-                    <div class="card w-64 h-24 rounded-lg shadow-lg overflow-hidden">
-                        <div class="wrapper h-2/3 w-full bg-slate-500 px-4 py-2">
+                    <div class="card w-full md:w-64 h-24 rounded-lg shadow-lg overflow-hidden">
+                        <div class="wrapper h-2/3 w-full bg-gray-500 px-4 py-2">
                             <div class="flex items-center flex-row gap-2">
                                 <div class="px-3 py-2 bg-teal-300/80 inline rounded-full">
                                     <i class="fa-solid fa-bullhorn fa-sm text-slate-700"></i>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="footer dark:bg-gray-100 px-4 py-1">
                             <a href="{{ route('dashboard.posts', ['type' => 'pengumuman']) }}"
-                                class="font-semibold text-orange-400 hover:text-orange-600 transition text-sm">Pergi ke
+                                class="font-semibold text-blue-400 hover:text-blue-600 transition text-sm">Pergi ke
                                 Dashboard</a>
                         </div>
                     </div>
@@ -106,13 +106,13 @@
             </div>
 
             <div class="my-4 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <h4 class="p-6 font-bold text-orange-400">Anggota Tempek</h4>
+                <h4 class="p-6 font-bold text-blue-400">Anggota Tempek</h4>
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-wrap gap-8">
 
 
 
-                    <div class="card w-64 h-24 rounded-lg shadow-lg overflow-hidden">
-                        <div class="wrapper h-2/3 w-full bg-slate-300 px-4 py-2">
+                    <div class="card w-full md:w-64 h-24 rounded-lg shadow-lg overflow-hidden">
+                        <div class="wrapper h-2/3 w-full bg-gray-500 px-4 py-2">
                             <div class="flex items-center flex-row gap-2">
                                 <div class="px-3 py-2 bg-teal-300/80 inline rounded-full">
                                     <i class="fa-regular fa-user"></i>
@@ -127,7 +127,7 @@
                         </div>
                         <div class="footer dark:bg-gray-100 px-4 py-1">
                             <a href="{{ route('dashboard.members') }}"
-                                class="font-semibold text-orange-400 hover:text-orange-600 transition text-sm">Pergi ke
+                                class="font-semibold text-blue-400 hover:text-blue-600 transition text-sm">Pergi ke
                                 Dashboard</a>
                         </div>
                     </div>

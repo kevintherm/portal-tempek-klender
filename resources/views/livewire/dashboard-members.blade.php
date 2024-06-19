@@ -161,33 +161,48 @@
 
             <form class="py-4">
 
-                <div class="mb-2">
+                <div class="mb-3">
                     <x-input-label>
                         Cari berdasarkan nama anggota
                     </x-input-label>
                     <x-text-input name="name" :value="request('name')" />
                 </div>
 
-                <div class="mb-2">
+                <div class="mb-3">
                     <x-input-label>
                         Cari berdasarkan no hp
                     </x-input-label>
                     <x-text-input name="phone" :value="request('phone')" />
                 </div>
 
-                <div class="mb-2">
+                <div class="mb-3">
                     <x-input-label>
                         Cari berdasarkan alamat
                     </x-input-label>
-                    <x-text-input name="address" placeholder="masukan alamat" :value="request('address')" />
+                    <x-text-input name="address" placeholder="Masukan Alamat" :value="request('address')" />
                 </div>
 
-                <x-primary-button type="submit">
-                    Terapkan Filter
-                </x-primary-button>
-                <a href="{{ url()->current() }}" class="btn-secondary">
-                    Reset Filter
-                </a>
+                <div class="mb-3">
+                    <x-input-label>
+                        Cari berdasarkan jabatan
+                    </x-input-label>
+                    <select name="position" class="form-input pe-16">
+                        <option value="">Pilih Jabatan</option>
+                        @foreach (\App\Models\Member::pluck('position')->unique() as $position)
+                            <option value="{{ $position }}" @if (request('position') == $position) selected @endif>
+                                {{ $position }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <x-primary-button type="submit">
+                        Terapkan Filter
+                    </x-primary-button>
+                    <a href="{{ url()->current() }}" class="btn-secondary">
+                        Reset Filter
+                    </a>
+                </div>
             </form>
 
         </div>
@@ -225,13 +240,10 @@
                                         Profesi
                                     </th>
                                     <th scope="col" class="px-6 py-3">
+                                        Jabatan
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         No HP
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Alamat
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Alasan bergabung
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Aksi
@@ -266,15 +278,10 @@
                                             {{ $member->job }}
                                         </td>
                                         <td class="px-6 py-4">
+                                            {{ $member->position }}
+                                        </td>
+                                        <td class="px-6 py-4">
                                             {{ $member->phone }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $member->address }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <p class="line-clamp-1">
-                                                {{ $member->reason_to_join }}
-                                            </p>
                                         </td>
                                         <td class="px-6 py-4 flex gap-2 flex-wrap justify-evenly">
                                             <button class="btn-primary"

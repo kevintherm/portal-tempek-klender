@@ -141,11 +141,11 @@
                                 @endif
 
                                 <div class="mb-4">
-                                    <x-input-label>Umur<x-field-required-indicator /></x-input-label>
+                                    <x-input-label>Tanggal Lahir<x-field-required-indicator /></x-input-label>
                                     <x-text-input placeholder="Masukkan umur anggota"
-                                        wire:model.blur="members.{{ $index }}.age" type="number"
-                                        class="w-full text-lg" name="age" required />
-                                    @error('members.' . $index . '.age')
+                                        wire:model.blur="members.{{ $index }}.birth" type="date"
+                                        class="w-full text-lg" name="birth" required />
+                                    @error('members.' . $index . '.birth')
                                         <x-input-error :messages="$message" />
                                     @enderror
                                 </div>

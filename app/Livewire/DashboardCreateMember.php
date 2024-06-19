@@ -26,7 +26,7 @@ class DashboardCreateMember extends Component
     #[Validate]
     public $name = "";
     #[Validate]
-    public $age = "";
+    public $birth = "";
     #[Validate]
     public $address = "";
     #[Validate]
@@ -54,7 +54,7 @@ class DashboardCreateMember extends Component
             [
                 'name' => '',
                 'status' => '',
-                'age' => '',
+                'birth' => '',
                 'address' => '',
                 'job' => '',
                 'position' => '',
@@ -71,7 +71,7 @@ class DashboardCreateMember extends Component
     {
         return [
             'members.*.name' => 'required|string|min:3|max:255',
-            'members.*.age' => 'required|integer|min:0',
+            'members.*.birth' => 'required|date',
             'members.*.status' => 'required',
             'members.*.address' => 'required|string',
             'members.*.job' => 'required|string|max:255',
@@ -96,7 +96,7 @@ class DashboardCreateMember extends Component
     {
         $this->members[] = [
             'name' => '',
-            'age' => '',
+            'birth' => '',
             'address' => '',
             'status' => '',
             'job' => '',
@@ -135,7 +135,7 @@ class DashboardCreateMember extends Component
         foreach ($this->members as $index => $member) {
             $savedMember = Member::create([
                 'name' => $member['name'],
-                'age' => $member['age'],
+                'birth' => $member['birth'],
                 'address' => $member['address'],
                 'job' => $member['job'],
                 'status' => $member['status'],
@@ -145,7 +145,7 @@ class DashboardCreateMember extends Component
                 'joined_at' => $member['joined_at'],
                 'is_dead' => $member['is_dead'],
                 'photo' => $member['photo'] ?? null,
-                'member_id' => $member['member_id']
+                'member_id' => isset($member['member_id']) ? $member['member_id'] : null
             ]);
 
             // Optionally, you can associate these members with a user if needed

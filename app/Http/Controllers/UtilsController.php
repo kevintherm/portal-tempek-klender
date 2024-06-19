@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UtilsController extends Controller
@@ -25,6 +26,15 @@ class UtilsController extends Controller
             'pagination' => [
                 'more' => false
             ]
+        ]);
+    }
+
+    function birthdayReminder()
+    {
+        $members = Member::whereMonth('birth', date('m'))->whereDay('birth', date('d'))->get(['name', 'birth']);
+
+        return response()->json([
+            'results' => $members
         ]);
     }
 }
