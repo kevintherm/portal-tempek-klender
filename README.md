@@ -1,66 +1,68 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+![Homepage](screenshots/homepage.png)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Web Portal Tempek Klender
 
-## About Laravel
+## Overview
+Web Portal Tempek Klender is a dynamic and interactive web platform designed for the Tempek Klender organization. This portal serves as a centralized hub for members to stay informed about upcoming events, view posts, manage organizational roles, and engage with various features that promote community involvement and efficient management.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Homepage**
+     ![Homepage](screenshots/homepage.png)
+   - A welcoming and intuitive landing page showcasing the latest posts, upcoming events, and announcements.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Create Post**
+![Create Post](screenshots/create-post.png)
+   - A user-friendly interface allowing authorized members to create and share new posts, complete with text, images, and multimedia content.
 
-## Learning Laravel
+4. **Dashboard**
+![Dashboard Posts](screenshots/dashbard-posts.png)
+   - A comprehensive dashboard offering an overview of the organization's activities, including recent posts, member statistics, and event highlights.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. **Dashboard - Posts Management**
+![Dashboard Members](screenshots/dashboard-members.png)
+   - An administrative view where authorized users can manage all posts, including editing, deleting, and updating content.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+6. **Dashboard - Members Management**
+![Dashboard](screenshots/dashboard.png)
+   - A dedicated section for managing member information, viewing member profiles, and updating member roles and permissions.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+7. **Edit Member**
+ ![Edit Member](screenshots/edit-member.png)
+   - A detailed form for editing member profiles, including contact information, roles, and membership status.
 
-## Laravel Sponsors
+8. **Edit Post**
+ ![Edit Post](screenshots/edit-posts.png)
+   - A streamlined interface for editing existing posts, allowing for quick updates and modifications to keep content relevant and accurate.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+9. **Gallery**
+![Gallery](screenshots/gallery.png)
+   - A visual gallery displaying images from past events, gatherings, and other organizational activities, fostering a sense of community and shared memories.
 
-### Premium Partners
+10. **Member Profile Photo History**
+![Member Profile Photo History](screenshots/member-profile-photo-history.png)
+   - A feature that maintains a history of profile photos for each member, providing a visual timeline of their engagement with the organization.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+11. **Permission Manager**
+![Permission Manager](screenshots/permission-manager.png)
+    - A powerful tool for managing user permissions, ensuring that members have appropriate access to various features and administrative functions.
 
-## Contributing
+12. **Roles Manager**
+ ![Roles Manager](screenshots/roles-manager.png)
+    - An interface for defining and managing roles within the organization, allowing for customized access levels and responsibilities.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+13. **View Member**
+![View Member](screenshots/view-member.png)
+    - A detailed member profile view, showcasing individual member information, role within the organization, and engagement history.
 
-## Code of Conduct
+## Objectives
+- **Community Engagement:** Enhance member participation and interaction through a centralized platform for information sharing and event announcements.
+- **Efficient Management:** Streamline administrative tasks such as post management, member updates, and role assignments.
+- **Transparency and Communication:** Foster a transparent communication channel within the organization, ensuring all members are well-informed and connected.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Target Audience
+- **Organization Members:** Active members looking to stay updated on organizational activities, view posts, and participate in events.
+- **Administrators:** Individuals responsible for managing content, member information, and overall platform maintenance.
+- **New Members:** Prospective members interested in learning more about Tempek Klender and its community.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+By leveraging these features, Web Portal Tempek Klender aims to build a more engaged, informed, and efficiently managed community, ensuring a cohesive and collaborative organizational environment.
