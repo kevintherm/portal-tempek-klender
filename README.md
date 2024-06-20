@@ -5,6 +5,149 @@
 ## Overview
 Web Portal Tempek Klender is a dynamic and interactive web platform designed for the Tempek Klender organization. This portal serves as a centralized hub for members to stay informed about upcoming events, view posts, manage organizational roles, and engage with various features that promote community involvement and efficient management.
 
+## Routes
+
+### General Routes
+
+- **Homepage**
+  - `GET /`
+  - Loads the welcome page.
+  - **Name:** `home`
+
+- **About Page**
+  - `GET /about`
+  - Loads the about page.
+  - **Name:** `about`
+
+### Authenticated Routes
+
+- **Profile**
+  - `GET /profile`
+  - Loads the user profile page.
+  - **Middleware:** `auth`
+  - **Name:** `profile`
+
+### Dashboard Routes
+
+- **Dashboard Home**
+  - `GET /dashboard`
+  - Loads the main dashboard page.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `dashboard`
+
+- **Posts Management**
+  - `GET /dashboard/posts`
+  - Loads the posts management page within the dashboard.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `dashboard.posts`
+
+- **Create Post**
+  - `POST /dashboard/posts`
+  - Handles the creation of new posts.
+  - **Middleware:** `auth`, `verified`
+
+- **Edit Post**
+  - `GET /dashboard/posts/{post}/edit`
+  - Loads the edit post page.
+  - **Middleware:** `auth`, `verified`
+
+- **Update Post**
+  - `PUT /dashboard/posts/{post}`
+  - Handles updating an existing post.
+  - **Middleware:** `auth`, `verified`
+
+- **Delete Post**
+  - `DELETE /dashboard/posts/{post}`
+  - Handles deleting a post.
+  - **Middleware:** `auth`, `verified`
+
+- **Members Management**
+  - `GET /dashboard/members`
+  - Loads the members management page within the dashboard.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `dashboard.members`
+
+- **Create Member**
+  - `GET /dashboard/members/create`
+  - Loads the create member page within the dashboard.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `dashboard.members.create`
+
+- **Edit Member**
+  - `GET /dashboard/members/{member}/edit`
+  - Loads the edit member page within the dashboard.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `dashboard.members.edit`
+
+- **Member Photo History**
+  - `GET /dashboard/members/{member}/photo_history`
+  - Loads the member photo history page within the dashboard.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `members.history.photo`
+
+- **Get Members by Name**
+  - `GET /dashboard/members/getMembersByName`
+  - Fetches members by name for autocomplete or search functionality.
+  - **Middleware:** `auth`, `verified`
+  - **Name:** `utils.get_members_by_name`
+
+### Role Management Routes
+
+- **Role Manager**
+  - `GET /roles`
+  - Loads the role manager page.
+  - **Name:** `roles.index`
+
+- **Create Role**
+  - `GET /roles/create`
+  - Loads the create role page.
+  - **Name:** `roles.create`
+
+- **Edit Role**
+  - `GET /roles/{role}/edit`
+  - Loads the edit role page.
+  - **Name:** `roles.edit`
+
+### Permission Management Routes
+
+- **Create Permission**
+  - `GET /perms/create`
+  - Loads the create permission page.
+  - **Name:** `perms.create`
+
+### Utility Routes
+
+- **Birthday Reminder**
+  - `GET /get-birthday-reminder`
+  - Fetches birthday reminders for members.
+  - **Controller:** `UtilsController@birthdayReminder`
+
+### Public Routes
+
+- **View Posts**
+  - `GET /posts`
+  - Loads the page displaying all posts.
+  - **Name:** `posts.index`
+
+- **Show Post**
+  - `GET /posts/{post}`
+  - Loads the page displaying a single post.
+  - **Name:** `posts.show`
+
+- **New Member Page**
+  - `GET /new-member`
+  - Loads the new member registration page.
+  - **Name:** `member.create`
+
+- **Gallery**
+  - `GET /gallery`
+  - Loads the gallery page.
+  - **Name:** `gallery`
+
+## Authentication Routes
+- The authentication routes are included from an external file, typically managing user login, registration, password reset, etc.
+  - **Path:** `require __DIR__ . '/auth.php';`
+
 ## Key Features
 
 1. **Homepage**
