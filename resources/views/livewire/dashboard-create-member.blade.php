@@ -175,13 +175,12 @@
                                     <select wire:model.blur="members.{{ $index }}.position" name="position"
                                         required
                                         class="w-full text-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                        <option selected>Pilih Jabatan</option>
-                                        <option value="Anggota">Anggota</option>
-                                        <option value="Ketua">Ketua</option>
-                                        <option value="Wakil Ketua">Wakil Ketua</option>
-                                        <option value="Bendahara">Bendahara</option>
-                                        <option value="Sekretaris">Sekretaris</option>
-                                        <option value="Lainnya">Lainnya</option>
+                                        <option>Pilih Jabatan</option>
+                                        @foreach ($possibleRoles as $role)
+                                            <option value="{{ $role->name }}">
+                                                {{ $role->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     @error('members.' . $index . '.position')
                                         <x-input-error :messages="$message" />

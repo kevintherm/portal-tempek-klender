@@ -7,6 +7,7 @@ use App\Livewire\DashboardEditMember;
 use App\Livewire\EditRole;
 use App\Livewire\MemberPhotoHistory;
 use App\Livewire\RoleManager;
+use App\Livewire\StaffHistory;
 use App\Models\User;
 use Livewire\Volt\Volt;
 use App\Livewire\DashboardPosts;
@@ -15,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewMemberController;
 
+
 if (env('APP_DEBUG')) {
     $user = User::first();
-
-    Auth::login($user);
+    if ($user)
+        Auth::login($user);
 }
 
 Route::get('/get-birthday-reminder', [UtilsController::class, 'birthdayReminder']);
+
+Route::get('/staff-history', StaffHistory::class)->name('staff.history');
 
 Route::prefix('roles')->group(function () {
     Route::get('/', RoleManager::class)->name('roles.index');

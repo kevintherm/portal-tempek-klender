@@ -2,11 +2,15 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Member;
 use Livewire\Component;
+use App\Models\StaffHistory;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Events\Validated;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\ValidationException;
@@ -19,6 +23,7 @@ class DashboardCreateMember extends Component
 
     public $read_only = false;
     public $joined_at, $joined_string;
+    public $possibleRoles = [];
     public $user_email; // user id is for parent user id
 
     public $members = [];
@@ -48,6 +53,7 @@ class DashboardCreateMember extends Component
     public function mount()
     {
         $this->all_members = Member::all();
+        $this->possibleRoles = Role::orderBy('name', 'asc')->get(['name', 'id']);
 
         // Retrieve saved data from session if available
         $this->members = session()->get('members', [
@@ -75,7 +81,7 @@ class DashboardCreateMember extends Component
             'members.*.status' => 'required',
             'members.*.address' => 'required|string',
             'members.*.job' => 'required|string|max:255',
-            'members.*.position' => 'required|string|max:255',
+            'members.*.position' => 'required|string',
             'members.*.phone' => 'required|string|max:255|unique:members',
             'members.*.reason_to_join' => 'nullable|string|max:255',
             'members.*.joined_at' => 'required|date',
@@ -100,7 +106,6 @@ class DashboardCreateMember extends Component
             'address' => '',
             'status' => '',
             'job' => '',
-            'position' => '',
             'phone' => '',
             'reason_to_join' => '',
             'joined_at' => now()->format('Y-m-d'),
@@ -132,14 +137,27 @@ class DashboardCreateMember extends Component
             $this->members[$index]['photo'] = $path;
         }
 
+        DB::beginTransaction();
+
         foreach ($this->members as $index => $member) {
+
+            $role = Role::findByName($member['position']);
+
+            $user = User::create([
+                'name' => $member['name'],
+                'email' => str($member['name'])->replace(' ', '') . bcrypt(Carbon::parse($member['birth'])->format('dmY')) . '@web.com',
+                'password' => bcrypt(Carbon::parse($member['birth'])->format('dmY'))
+            ]);
+
+            $user->assignRole($role);
+
             $savedMember = Member::create([
+                'user_id' => $user->id,
                 'name' => $member['name'],
                 'birth' => $member['birth'],
                 'address' => $member['address'],
                 'job' => $member['job'],
                 'status' => $member['status'],
-                'position' => $member['position'],
                 'phone' => $member['phone'],
                 'reason_to_join' => $member['reason_to_join'],
                 'joined_at' => $member['joined_at'],
@@ -147,10 +165,11 @@ class DashboardCreateMember extends Component
                 'photo' => $member['photo'] ?? null,
                 'member_id' => isset($member['member_id']) ? $member['member_id'] : null
             ]);
-
-            // Optionally, you can associate these members with a user if needed
-            // $user->members()->save($savedMember);
         }
+
+        DB::commit();
+
+
 
         $this->alert('success', 'Member baru ditambahkan!', [
             'position' => 'bottom-right',

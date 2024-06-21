@@ -8,12 +8,23 @@ use App\Models\PhotoHistory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Models\Role;
 
 class Member extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public static function findByName($name)
+    {
+        return Member::where('name', $name)->firstOrFail();
+    }
+
+    public function getPositionAttribute()
+    {
+        return $this->user?->roles->first()?->name ?? "Anggota";
+    }
 
     function user()
     {
@@ -48,7 +59,7 @@ class Member extends Model
 
     function getLastPositionTimeAttribute()
     {
-        return $this->staff_histories()->latest()?->first()->created_at ?? null;
+        return $this->staff_histories()->latest()?->first()->created_at ?? now();
     }
 
     /**
@@ -61,7 +72,7 @@ class Member extends Model
         return [
             'is_dead' => 'boolean',
             'joined_at' => 'date:Y-m-d',
-            'age' => 'date:Y-m-d'
+            'birth' => 'date:Y-m-d'
         ];
     }
 

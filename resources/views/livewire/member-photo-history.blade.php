@@ -32,7 +32,7 @@
                         title: $el.getAttribute('alt')
                     })">
                         </li>
-                        @forelse ($photo_histories as $history)
+                        @foreach ($photo_histories as $history)
                             <li class="mb-10 ms-4">
                                 <div
                                     class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
@@ -50,8 +50,7 @@
                         title: $el.getAttribute('alt')
                     })">
                             </li>
-                        @empty
-                        @endforelse
+                        @endforeach
                     </ol>
 
 

@@ -18,6 +18,7 @@ class DashboardMembers extends Component
 
     public function delete_member(Member $member)
     {
+        $member->user->delete();
         $member->delete();
 
         $this->alert('success', 'Berhasil dihapus dari daftar!', [

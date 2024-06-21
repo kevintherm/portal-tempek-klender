@@ -22,6 +22,14 @@
 
                 {{-- Permissions --}}
                 @livewire('PermissionsTable')
+
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <a href="{{ route('staff.history') }}" class="text-blue-500 hover:text-blue-700" wire:navigate>
+                            Lihat Riwayat Staff
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 

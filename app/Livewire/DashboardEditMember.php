@@ -2,14 +2,15 @@
 
 namespace App\Livewire;
 
-use App\Models\Member;
-use App\Models\StaffHistory;
 use Carbon\Carbon;
+use App\Models\Member;
 use Livewire\Component;
 use App\Models\PhotoHistory;
+use App\Models\StaffHistory;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
+use Spatie\Permission\Models\Role;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DashboardEditMember extends Component
@@ -19,6 +20,7 @@ class DashboardEditMember extends Component
     use LivewireAlert;
 
     public $selectedMember = null;
+    public $possibleRoles = [];
 
     public Member $member;
 
@@ -51,12 +53,15 @@ class DashboardEditMember extends Component
     public function mount(Member $member)
     {
         $this->member = $member;
+        $this->possibleRoles = Role::orderBy('name', 'asc')->get(['name', 'id']);
+
 
         $this->fill(
             $member->only(['name', 'birth', 'phone', 'status', 'address', 'job', 'position', 'reason_to_join', 'is_dead']),
         );
 
         $this->updatedJoinedAt();
+        $this->updatedBirth();
     }
 
     public function save()
@@ -82,15 +87,23 @@ class DashboardEditMember extends Component
             $this->member_id = null;
 
         if ($this->position != $this->member->position) {
+
+            $fromRole = Role::findByName($this->member->position);
+            $toRole = Role::findByName($this->position);
+
+
             StaffHistory::create([
                 'member_id' => $this->member->id,
-                'position' => $this->member->position,
+                'role_id' => $fromRole->id,
                 'since' => $this->member->last_position_time
             ]);
+
+
+            $this->member->user->syncRoles([$toRole]);
         }
 
         $this->member->update(
-            $this->only(['name', 'birth', 'phone', 'status', 'address', 'job', 'position', 'reason_to_join', 'is_dead', 'member_id'])
+            $this->only(['name', 'birth', 'phone', 'status', 'address', 'job', 'reason_to_join', 'is_dead', 'member_id'])
         );
 
         $this->alert('success', 'Berhasil Update Detail Anggota!', [
@@ -119,6 +132,11 @@ class DashboardEditMember extends Component
     public function updatedJoinedAt()
     {
         $this->joined_at = date_format(date_create($this->joined_at), 'Y-m-d');
+    }
+
+    public function updatedBirth()
+    {
+        $this->birth = date_format(date_create($this->birth), 'Y-m-d');
     }
 
     public function render()
