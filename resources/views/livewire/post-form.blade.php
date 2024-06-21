@@ -3,6 +3,9 @@
         postType: '{{ old('type', $post ? $post->type->value : '') }}',
         editor: null,
         slug: '',
+        rupiah: (number) => {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+        }
     }" x-ref="form">
     @csrf
     @method($method)
@@ -31,7 +34,7 @@
         @enderror
     </div>
 
-    <div class="pb-4">
+    <div class="mb-4">
         <x-input-label value="Judul" />
         <x-text-input name="title" class="max-w-md w-full" :value="old('title', $post ? $post->title : '')" wire:model="title"
             wire:change="get_slug" />
@@ -40,7 +43,7 @@
         @enderror
     </div>
 
-    <div class="pb-4">
+    <div class="mb-4">
         <x-input-label value="Slug" />
         <x-text-input name="slug" class="max-w-md w-full" :value="old('slug', $post ? $post->slug : '')" wire:model="slug" />
         @error('slug')
@@ -48,7 +51,7 @@
         @enderror
     </div>
 
-    <div class="pb-4" wire:ignore>
+    <div class="mb-4" wire:ignore>
         <x-input-label value="Isi" />
         <textarea x-init="editor = suneditor.create($el, {
             height: 'auto',
@@ -83,10 +86,43 @@
     </div>
 
     <div x-show="postType == 'kegiatan' || postType == 'pengumuman'" x-collapse
-        class="flex flex-row items-center gap-2">
+        class="flex flex-row items-center gap-2 mb-4">
         <x-text-input type="checkbox" name="show_on_featured" :checked="old('show_on_featured', $post ? $post->show_on_featured : true)" :value="1" />
         <x-input-label value="Pajang di Halaman Depan" />
         @error('show_on_featured')
+            <x-input-error :messages="$message" />
+        @enderror
+    </div>
+
+    <div x-show="postType == 'kegiatan'" x-collapse class="mb-4" x-data="{
+        inputs: [''],
+        delete: (el) => {
+            const index = this.inputs.indexOf(input)
+            if (index != -1) this.inputs.slice(index, 1);
+    
+            this.inputs = this.inputs.filter(() => true);
+        }
+    }">
+        <x-input-label value="Pengeluaran Biaya" />
+        <template x-for="(input, i) in inputs">
+            <div class="mb-4 border rounded-lg flex flex-col gap-2 p-4 max-w-md" x-data="{ amount: 0 }">
+                <div class="flex justify-end" x-show="inputs.indexOf(input) != 0">
+                    <x-secondary-button @click.prevent="delete(input)">
+                        Hapus
+                    </x-secondary-button>
+                </div>
+                <input x-model="amount" :name="`expenses[${i}][amount]`" placeholder="Jumlah"
+                    class="w-full form-input" />
+                <p x-text="rupiah(amount)"></p>
+                <textarea :name="`expenses[${i}][desc]`" :textarea="true" placeholder="Deskripsi Pengeluaran"
+                    class="w-full form-input"></textarea>
+            </div>
+        </template>
+
+        <x-secondary-button @click.prevent="inputs.push({})">
+            Tambah Pengeluaran
+        </x-secondary-button>
+        @error('expenses')
             <x-input-error :messages="$message" />
         @enderror
     </div>

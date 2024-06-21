@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\PostType;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -52,9 +53,23 @@ class PostController extends Controller
 
         $validated['user_id'] = Auth::user()->id;
 
-        Post::create($validated);
+        $post = Post::create($validated);
 
-        return redirect()->route('posts.index');
+        if ($request->expenses) {
+            foreach ($request->expenses as $expense) {
+                Expense::create([
+                    'post_id' => $post->id,
+                    'desc' => isset($expense['desc'])
+                        ? $expense['desc']
+                        : '',
+                    'amount' => isset($expense['amount'])
+                        ? $expense['amount']
+                        : ''
+                ]);
+            }
+        }
+
+        return redirect()->route('posts.show', $post->slug);
     }
 
     /**

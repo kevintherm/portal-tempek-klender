@@ -5,6 +5,7 @@ use App\Livewire\CreatePermission;
 use App\Livewire\CreateRole;
 use App\Livewire\DashboardEditMember;
 use App\Livewire\EditRole;
+use App\Livewire\ExpenseTrack;
 use App\Livewire\MemberPhotoHistory;
 use App\Livewire\RoleManager;
 use App\Livewire\StaffHistory;
@@ -59,6 +60,8 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
 
     Route::get('members/{member}/edit', DashboardEditMember::class)
         ->name('dashboard.members.edit');
+
+    Route::get('/expenses', ExpenseTrack::class)->name('expenses.index');
 
 });
 

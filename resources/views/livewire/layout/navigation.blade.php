@@ -41,6 +41,9 @@ new class extends Component {
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')" wire:navigate>
                         {{ __('Jabatan & Izin') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('expenses.index')" :active="request()->routeIs('roles.index')" wire:navigate>
+                        {{ __('Keuangan') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -109,6 +112,9 @@ new class extends Component {
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')" wire:navigate>
                 {{ __('Jabatan & Izin') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('expenses.index')" :active="request()->routeIs('roles.index')" wire:navigate>
+                {{ __('Keuangan') }}
             </x-responsive-nav-link>
         </div>
 

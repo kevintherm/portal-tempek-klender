@@ -5,6 +5,7 @@ namespace App\Models;
 use App\PostType;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Expense;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,6 +18,11 @@ class Post extends Model
     function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'post_id');
     }
 
     protected function casts(): array
